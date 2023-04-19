@@ -1,0 +1,25 @@
+# arquivos binários gerados durante a compilação
+bin/
+obj/
+
+# cache de dependências do NuGet
+**/packages/
+
+# arquivos de build
+*.sln.ide/
+*.sln.iml
+*.suo
+*.ipr
+*.iws
+*.bak
+*.cache
+*.resharper
+*.vs
+
+# arquivos de log
+*.logs
+*.log
+*.txt
+
+# pasta para ferramentas e utilitários
+tools/
