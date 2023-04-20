@@ -20,7 +20,7 @@ namespace Domain.Models
             Password = HashPassword(password);
         }
 
-        string HashPassword(string password)
+        static string HashPassword(string password)
         {
             SHA256 hash = SHA256.Create();
             byte[] passwordBytes = Encoding.Default.GetBytes(password);

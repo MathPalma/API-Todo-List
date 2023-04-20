@@ -2,6 +2,7 @@
 using Application.Mappers;
 using Application.ViewModels;
 using DataAccessSql;
+using Domain;
 using Domain.Models;
 
 namespace Application.Services
@@ -14,9 +15,19 @@ namespace Application.Services
             _repository = repository;
         }
 
-        public async Task RegisterUser(RegisterRequestViewModel requestViewModel)
+        public async Task<ReturnMessage<bool>> RegisterUser(RegisterRequestViewModel requestViewModel)
         {
-            UserRegisterModel userRegisterModel = requestViewModel.ToModel();
+            try
+            {
+                UserRegisterModel userRegisterModel = requestViewModel.ToModel();
+                await _repository.RegisterUser(userRegisterModel);
+
+                return new ReturnMessage<bool>(201, "Successfully registered user", true);
+            }
+            catch (Exception ex)
+            {
+                return new ReturnMessage<bool>(500, "An error occurred while trying to register the user.", false);
+            }
         }
     }
 }

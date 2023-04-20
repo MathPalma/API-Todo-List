@@ -1,9 +1,10 @@
 ﻿using Application.ViewModels;
+using Domain;
 
 namespace Application.Interfaces
 {
     public interface IAuthenticationService
     {
-        Task RegisterUser(RegisterRequestViewModel requestViewModel);
+        Task<ReturnMessage<bool>> RegisterUser(RegisterRequestViewModel requestViewModel);
     }
 }

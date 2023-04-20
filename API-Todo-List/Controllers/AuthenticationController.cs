@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Application.ViewModels;
+using Domain;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -31,9 +32,12 @@ namespace API_Todo_List.Controllers
 
         // POST api/<AuthenticationController>
         [HttpPost]
-        public async Task RegisterUser([FromBody] RegisterRequestViewModel request)
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ReturnMessage<bool>))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ReturnMessage<bool>))]
+        public async Task<IActionResult> RegisterUser([FromBody] RegisterRequestViewModel request)
         {
-            await _authenticationService.RegisterUser(request);
+            ReturnMessage<bool> returnMessage = await _authenticationService.RegisterUser(request);
+            return StatusCode(returnMessage.StatusCode, returnMessage);
         }
 
         // PUT api/<AuthenticationController>/5
